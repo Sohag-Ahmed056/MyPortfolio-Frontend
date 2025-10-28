@@ -1,17 +1,23 @@
-import { getUserSession } from "@/app/helpers/getUserSession";
+
 import ProjectCard from "@/components/ui/projectCard";
-import { redirect } from "next/navigation";
-import React from "react";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Sohag's Portfolio|Projects",
+  description: "Sohag's Portfolio Projects",
+}
 
 const ProjectPage = async () => {
 
 
-  const session = await getUserSession()
-  if(!session){
-    redirect('/login')
+  // const session = await getUserSession()
+  // if(!session){
+  //   redirect('/login')
 
-  }
+  // }
   // ✅ Fetch data (server-side)
+  
   const res = await fetch("http://localhost:5000/api/v1/project/getAll", {
     next:{
       revalidate:20,
@@ -27,7 +33,7 @@ const ProjectPage = async () => {
   const projects = data?.data || [];
 
   return (
-    <div className="p-6 mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-6 mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.length > 0 ? (
         projects.map((project: any) => (
           <ProjectCard

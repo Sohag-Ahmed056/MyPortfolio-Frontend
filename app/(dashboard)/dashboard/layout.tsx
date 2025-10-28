@@ -1,8 +1,14 @@
 // app/(dashboard)/dashboard/layout.tsx
-"use client";
+// "use client";
 
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+
+import { SidebarProvider} from "@/components/ui/sidebar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sohag's Portfolio",
+  description: "Find A Full Stack Web Developer",
+};
 
 export default function DashboardLayout({
   children,
@@ -13,7 +19,7 @@ export default function DashboardLayout({
     <SidebarProvider>
       <div className="flex min-h-screen w-full ">
         {/* Sidebar Section */}
-        <AppSidebar />
+       
 
         {/* Main Section */}
         <div className="flex flex-1 flex-col overflow-hidden">

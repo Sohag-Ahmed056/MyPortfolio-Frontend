@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { toast } from "sonner";
@@ -25,6 +25,8 @@ import {
 } from "@/components/ui/card";
 
 import { submitResume } from "@/app/actions/resumeCreateAction";
+import ResumePDF from "../ui/resumeTemplate";
+// import ResumePdfGenerator from "../ui/resumeTemplate";
 
 type ResumeFormValues = {
   title: string;
@@ -56,9 +58,10 @@ type ResumeFormValues = {
     duration: string;
     responsibilities: string;
   }[];
-};
+};1
 
 export default function CreateResumePage() {
+  const [createdResume, setCreatedResume] = useState<any>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -94,7 +97,10 @@ export default function CreateResumePage() {
       if (res.success) {
         toast.success("✅ Resume created successfully!");
         form.reset();
-        router.push("/");
+        setCreatedResume(res.data);
+        
+
+        // router.push("/");
       } else {
         toast.error("❌ Failed to create resume", { description: res.error });
       }
@@ -320,6 +326,10 @@ export default function CreateResumePage() {
           Your resume will appear after publishing.
         </CardFooter>
       </Card>
+      <div className="m-4">
+             {createdResume && <ResumePDF data={createdResume} />}
+      </div>
+      
     </div>
   );
 }

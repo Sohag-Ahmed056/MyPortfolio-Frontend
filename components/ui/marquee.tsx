@@ -17,7 +17,7 @@ const technologies = [
 
 export default function TechMarquee() {
   return (
-    <section className="relative overflow-hidden  py-8">
+    <section className="relative overflow-hidden rounded-2xl mt-8 py-8">
       {/* Gradient overlays for fade edges */}
       <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-linear-to-r from-muted to-transparent z-10" />
       <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-linear-to-l from-muted to-transparent z-10" />

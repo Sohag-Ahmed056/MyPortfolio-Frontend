@@ -1,4 +1,11 @@
 import { BlogCard } from "@/components/ui/blogCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lastest Blogs",
+  description: "Find your latest blogs",
+};
+
 
 export default async function BlogsPage() {
 

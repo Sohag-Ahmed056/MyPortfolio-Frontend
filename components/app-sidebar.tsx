@@ -11,92 +11,77 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import { useSession } from "next-auth/react";
 
-const navItems = [
+type NavItem = {
+  title: string;
+  url: string;
+  items?: NavItem[];
+};
+
+const navMain: NavItem[] = [
   { title: "Home", url: "/" },
   { title: "Create Blog", url: "/dashboard/blog/create" },
-  { title: "Build CV", url: "/dashboard/cv-builder" },
+  { title: "Build CV", url: "/dashboard/resume" },
   { title: "Create Project", url: "/dashboard/project" },
-  { title: "Get All Users", url: "/dashboard/users" },
   { title: "All Blogs", url: "/dashboard/blog" },
 ];
 
-export function AppSidebar() {
-  const [open, setOpen] = React.useState(false);
-  const{data:session}= useSession()
-  const name = session?.user.name || "User Dashboard"
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
+  const {data: session} = useSession() 
   return (
-    <>
-      {/* Mobile toggle */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 bg-blue-500 text-white p-2 rounded-md"
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        Menu
-      </button>
-
-      {/* Sidebar */}
-      <Sidebar
-        variant="floating"
-        className={`fixed md:static h-screen z-40 ${
-          open ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 transition-transform duration-200`}
-      >
-        <SidebarHeader>
+    <Sidebar {...props}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="#">
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <GalleryVerticalEnd className="size-4" />
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-medium">{session?.user?.name}</span>
+                  <span className="">{session?.user?.email}</span>
+                </div>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild>
-                <Link
-                  href="/dashboard"
-                  className="flex items-center gap-2"
-                  onClick={() => setOpen(false)}
-                >
-                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex w-8 h-8 items-center justify-center rounded-lg">
-                    <GalleryVerticalEnd className="w-4 h-4" />
-                  </div>
-                  <div className="flex flex-col leading-none">
-                    <span className="font-medium text-base">{name}</span>
-                    <span className="text-xs text-muted-foreground">
-                      Manage Your Content
-                    </span>
-                  </div>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {navMain.map((item) => (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild>
+                  <a href={item.url} className="font-medium">
+                    {item.title}
+                  </a>
+                </SidebarMenuButton>
+                {item.items?.length ? (
+                  <SidebarMenuSub>
+                    {item.items.map((item) => (
+                      <SidebarMenuSubItem key={item.title}>
+                        <SidebarMenuSubButton asChild >
+                          <a href={item.url}>{item.title}</a>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                ) : null}
+              </SidebarMenuItem>
+            ))}
           </SidebarMenu>
-        </SidebarHeader>
-
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarMenu className="gap-2">
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link
-                      href={item.url}
-                      className="font-medium hover:text-sidebar-primary"
-                      onClick={() => setOpen(false)}
-                    >
-                      {item.title}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroup>
-        </SidebarContent>
-      </Sidebar>
-
-      {/* Overlay for mobile */}
-      {open && (
-        <div
-          className="fixed inset-0 z-30 bg-black/40 md:hidden"
-          onClick={() => setOpen(false)}
-        />
-      )}
-    </>
-  );
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarRail />
+    </Sidebar>
+  )
 }
+

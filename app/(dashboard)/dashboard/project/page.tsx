@@ -1,9 +1,14 @@
-import CreateProjectPage from '@/components/form/projectCreateForm'
-import React from 'react'
 
-const Project = () => {
+import { getUserSession } from '@/app/helpers/getUserSession'
+import CreateProjectPage from '@/components/form/projectCreateForm'
+
+
+const Project = async () => {
+  const session = await getUserSession()
   return (
-    <CreateProjectPage></CreateProjectPage>
+    <>
+      {session?.user?.role === "OWNER" && <CreateProjectPage />}
+    </>
   )
 }
 

@@ -1,42 +1,35 @@
-import { authOptions } from "@/app/helpers/authOptions"
 import { getUserSession } from "@/app/helpers/getUserSession"
 import { AppSidebar } from "@/components/app-sidebar"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+
 import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { h1, h2 } from "motion/react-client"
-import { useSession } from "next-auth/react"
+export default async function Page() {
 
-
-export default async function Dashboard() {
-
-
-const session= await getUserSession();
+  const session = await getUserSession()
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "19rem",
-        } as React.CSSProperties
-      }
-    >
-   
-      <h1 className="text-5xl text center ">
-  {session ? `Hi ${session.user?.name}` : "Welcome, Guest"}
-</h1>
-
-     
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+          <div className="flex items-center gap-2 px-3">
+            <SidebarTrigger />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            
+          </div>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            
+            
+            <h1 className="text-4xl">Hi!  {session?.user?.name} </h1>
+          </div>
+          <div  />
+        </div>
+      </SidebarInset>
     </SidebarProvider>
   )
 }
