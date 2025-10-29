@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import BlogDeleteButton from "./blogDeleteButton";
+import { getUserSession } from "@/app/helpers/getUserSession";
 
 interface BlogCardProps {
     id: string,
@@ -14,7 +15,7 @@ interface BlogCardProps {
   authorName?: string;
 }
 
-export function BlogCard({
+export async function BlogCard({
     id,
   title,
   excerpt,
@@ -22,6 +23,8 @@ export function BlogCard({
   published,
   authorName,
 }: BlogCardProps) {
+
+  const session = await getUserSession()
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {coverImage && (
@@ -51,7 +54,11 @@ export function BlogCard({
             See Details
           </Button>
         </Link>
-        <BlogDeleteButton blogId={Number(id)} />
+        
+
+        {session?.user?.role === "OWNER" && (
+          <BlogDeleteButton blogId={Number(id)} />
+        )}
       </CardFooter>
     </Card>
   );
