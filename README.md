@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# 🌐 My Portfolio
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+A modern, responsive personal portfolio built with Next.js 14, TypeScript, Tailwind CSS, and shadcn/ui.
+
+It showcases my projects, blogs, resume, and professional background — optimized for performance, SEO, and social sharing.
+
+## 🚀 Features
+
+  * ⚡ **Next.js 14 (App Router):** Blazing fast, server-side rendering (SSR) & static generation (ISR)
+  * 🎨 **Tailwind CSS + shadcn/ui:** Clean, minimal, and fully responsive UI
+  * 🔐 **NextAuth.js:** Secure authentication (if included)
+  * 🧠 **TypeScript:** Type-safe, maintainable codebase
+  * 📝 **Blog System:** Create, edit, and view blogs
+  * 💼 **Project Showcase:** Add and display professional projects
+  * 🧾 **Resume Builder:** Dynamic resume generation
+  * 🌍 **SEO Optimized:** Meta tags and Open Graph (OG) image support
+  * 🧩 **Reusable Components:** Sidebar, navigation, forms, and modals
+
+-----
+
+## 🧱 Tech Stack
+
+| Category | Technology |
+| :--- | :--- |
+| **Framework** | Next.js 14 |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS, shadcn/ui |
+| **Icons** | Lucide Icons |
+| **Forms** | React Hook Form + Zod |
+| **Auth** | NextAuth.js |
+| **Deployment** | Vercel |
+| **API** | Custom Backend (Express + MongoDB) (if used) |
+
+-----
+
+## 📁 Folder Structure
+
+```plaintext
+.
+├── app/
+│   ├── (dashboard)/dashboard/
+│   │   ├── blog/
+│   │   ├── project/
+│   │   ├── resume/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── (public)/
+│   │   ├── about/
+│   │   ├── contact/
+│   │   ├── login/
+│   │   ├── projects/
+│   │   ├── register/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── actions/
+│   ├── api/
+│   ├── helpers/
+│   ├── types/
+│   ├── favicon.ico
+│   ├── globals.css
+│   └── layout.tsx
+├── components/
+├── hooks/
+├── lib/
+├── public/
+├── .gitignore
+├── README.md
+├── bun.lock
+├── components.json
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-----
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Installation & Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **Clone the Repository**
 
-## Learn More
+    ```bash
+    git clone https://github.com/Sohag-Ahmed056/MyPortfolio-Frontend.git
+    cd MyPortfolio-Frontend
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Install Dependencies**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Setup Environment Variables**
 
-## Deploy on Vercel
+    Create a `.env.local` file in the root directory:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```.env
+    NEXTAUTH_SECRET=your_nextauth_secret
+    NEXT_PUBLIC_API_URL=https://your-backend-api.vercel.app
+    EMAIL_USER=your_email@gmail.com
+    EMAIL_PASS=your_email_password
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4.  **Run the Development Server**
+
+    ```bash
+    npm run dev
+    ```
+
+The app will be running on `http://localhost:3000`
