@@ -18,7 +18,7 @@ const ProjectPage = async () => {
   // }
   // ✅ Fetch data (server-side)
   
-  const res = await fetch("http://localhost:5000/api/v1/project/getAll", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/project/getAll`, {
     next:{
       revalidate:20,
     }

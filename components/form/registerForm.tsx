@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 // --- Zod validation schema ---
 const signupSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.email({ message: "Invalid email address" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 });
 
@@ -63,7 +63,7 @@ export default function SignupForm() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br px-4">
       <Card className="w-full max-w-md shadow-lg border border-gray-200 dark:border-gray-800">
         <CardHeader className="space-y-2">
           <CardTitle className="text-2xl font-semibold text-center">Create Account</CardTitle>

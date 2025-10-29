@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+
 import { GalleryVerticalEnd } from "lucide-react";
 import {
   Sidebar,
@@ -24,17 +24,21 @@ type NavItem = {
   items?: NavItem[];
 };
 
-const navMain: NavItem[] = [
-  { title: "Home", url: "/" },
-  { title: "Create Blog", url: "/dashboard/blog/create" },
-  { title: "Build CV", url: "/dashboard/resume" },
-  { title: "Create Project", url: "/dashboard/project" },
-  { title: "All Blogs", url: "/dashboard/blog" },
-];
+
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
+
   const {data: session} = useSession() 
+  const navMain: NavItem[] = [
+  { title: "Home", url: "/" },
+  { title: "Create Blog", url: "/dashboard/blog/create" },
+  { title: "Build CV", url: "/dashboard/resume" },
+  { title: "All Blogs", url: "/dashboard/blog" },
+  ...(session?.user?.role === "OWNER" ? [{ title: "Create Project", url: "/dashboard/project" }] : [])
+];
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>

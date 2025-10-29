@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { base } from "motion/react-client";
 
 // interface Blog {
 //   id: number;
@@ -23,8 +24,9 @@ interface Props {
 }
 
 export default async function BlogDetails({ params }: Props) {
+  const baseAPi = process.env.NEXT_PUBLIC_BASE_API
   const {id}= await params;
-  const res = await fetch(`http://localhost:5000/api/v1/blog/details/${id}`, {
+  const res = await fetch(`${baseAPi}/api/v1/blog/details/${id}`, {
     cache: "no-store",
   });
 

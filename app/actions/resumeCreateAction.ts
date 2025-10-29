@@ -1,7 +1,6 @@
 "use server";
 
 import { getServerSession } from "next-auth";
-import { cookies } from "next/headers";
 import { authOptions } from "../helpers/authOptions";
 
 export async function submitResume(data: any) {
@@ -23,7 +22,7 @@ export async function submitResume(data: any) {
   }
 
   // Send data to Express backend
-  const res = await fetch("http://localhost:5000/api/v1/resume/create", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/resume/create`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

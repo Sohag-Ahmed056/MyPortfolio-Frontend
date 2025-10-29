@@ -4,7 +4,7 @@ import { revalidateTag } from "next/cache";
 
 export async function deleteBlogAction(blogId: number) {
   try {
-    const res = await fetch(`http://localhost:5000/api/v1/blog/delete/${blogId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/blog/delete/${blogId}`, {
         cache:'no-store',
       method: "DELETE",
       credentials: "include", // send cookies if needed

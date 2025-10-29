@@ -11,7 +11,7 @@ export default async function BlogsPage() {
 
 
  
-  const res = await fetch("http://localhost:5000/api/v1/blog/getAll", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/blog/getAll`, {
        next: { tags: ["projects","default"]},
   });
 

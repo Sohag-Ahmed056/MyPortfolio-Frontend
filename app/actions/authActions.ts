@@ -1,14 +1,14 @@
 "use server";
 
 // import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
+
 
 export async function loginUser(formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
   try {
-    const res = await fetch("http://localhost:5000/api/v1/auth/login", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -70,13 +70,15 @@ export async function loginUser(formData: FormData) {
 
 export const registerUser = async(formData:FormData)=>{
 
+  
+
      const name = formData.get("name")
      const email = formData.get("email")
      const password = formData.get("password")
 
      try {
 
-      const res= await fetch("http://localhost:5000/api/v1/user/create",{
+      const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/auth/register`,{
         method: "POST",
         headers:{"Content-Type": "application/json"},
         body: JSON.stringify({ name,email, password }),

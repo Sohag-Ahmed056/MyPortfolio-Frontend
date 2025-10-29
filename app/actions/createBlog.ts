@@ -33,7 +33,7 @@ export async function createBlogAction(formData: FormData) {
     const validated = blogSchema.parse(rawData);
 
     // ✅ Send to backend
-    const res = await fetch("http://localhost:5000/api/v1/blog/create", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/blog/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

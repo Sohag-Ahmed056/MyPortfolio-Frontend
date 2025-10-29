@@ -2,7 +2,7 @@
 
 export async function deleteProjectAction(projectId: number) {
   try {
-    const res = await fetch(`http://localhost:5000/api/v1/project/delete/${projectId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/api/v1/project/delete/${projectId}`, {
         cache:'no-store',
       method: "DELETE",
       credentials: "include", // send cookies if needed

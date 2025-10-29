@@ -26,7 +26,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ModeToggle } from "./modeTogle";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, } from "next-auth/react";
 import { UserProfileMenu } from "./ui/profileMenu";
 
 const navigationLinks = [
@@ -167,9 +167,15 @@ export default function Navbar() {
                 
               )
             }
-            <Button asChild size="sm" className="text-sm">
+
+            {
+              session && (
+                  <Button asChild size="sm" className="text-sm">
                 <p> Hi {session?.user?.name}</p>
             </Button>
+              )
+            }
+         
             <ModeToggle />
           </div>
         </div>

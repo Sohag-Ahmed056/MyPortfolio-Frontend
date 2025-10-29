@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { FormRichTextEditor } from "../RichTextEditor";
 const formSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   excerpt: z.string().min(10, "Excerpt must be at least 10 characters"),
@@ -114,10 +115,11 @@ export default function CreateBlogPage() {
                   <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                      <Textarea
+                      <FormRichTextEditor
+                        value={field.value}
+                        onChange={field.onChange}
                         placeholder="Write your full blog content here..."
-                        className="min-h-[150px]"
-                        {...field}
+                        minHeight="min-h-64"
                       />
                     </FormControl>
                     <FormMessage />
