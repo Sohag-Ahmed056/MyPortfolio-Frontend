@@ -5,6 +5,7 @@ import ProjectPage from './projects/page'
 import SkillsSection from '@/components/ui/skill'
 import ContactPage from './contact/page'
 import { Metadata } from 'next'
+import EducationSection from '@/components/ui/education'
  export const metadata: Metadata = {
   title: "Home",
   description: "Find A Full Stack Web Developer",
@@ -24,6 +25,7 @@ const Homepage = () => {
      <SkillsSection></SkillsSection>
 
     <ContactPage></ContactPage>
+    <EducationSection></EducationSection>
    </main>
   )
 }
